@@ -1,0 +1,86 @@
+<!--
+
+    This file is part of beforeShowDay.
+
+    beforeShowDay is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    beforeShowDay is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with beforeShowDay.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--
+
+    This file is part of PrimeFaces p:calendar beforeShowDay.
+
+    PrimeFaces p:calendar beforeShowDay is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    PrimeFaces p:calendar beforeShowDay is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with PrimeFaces p:calendar beforeShowDay.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	</f:facet>
+	<title>Calendar Test</title>
+</h:head>
+
+<h:body id="body">
+
+	<h:outputScript>
+	 //<![CDATA[
+		function processDay(date) {
+			var specialDays = new Array(#{fn:join(calendarBean.getSpecialDays(), ',')});
+			
+			for (var i = 0; i < specialDays.length; i++) {
+				var sDate = new Date(specialDays[i]);
+				
+				var compare1 = new Date(date.getFullYear(),date.getMonth(),date.getDate());
+				var compare2 = new Date(sDate.getFullYear(),sDate.getMonth(),sDate.getDate());
+				
+				if(compare1.getTime() == compare2.getTime()) {
+					return [false, ''];
+				}
+			}
+	        
+			return [true, ''];
+		};
+	 //]]>
+	</h:outputScript>
+
+	<h:form id="form">
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Calendario :" />
+			<p:calendar id="calendar" mode="inline"
+				value="#{calendarBean.currentDay}" beforeShowDay="processDay" />
+		</h:panelGrid>
+	</h:form>
+
+</h:body>
+</html>

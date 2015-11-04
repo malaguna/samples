@@ -1,2 +1,3 @@
 # samples
-Some short sample applications 
+
+This repository contains several sample applications, created to show some specific behaviour, framework or technology.
