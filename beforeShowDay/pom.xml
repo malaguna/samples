@@ -88,7 +88,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>calendar-test</finalName>
+		<finalName>beforeShowDay</finalName>
 		
 		<plugins>
 			<plugin>
